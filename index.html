@@ -345,9 +345,15 @@
     } else if(type === 'hire'){
       bbText(g, 'GOT ALPHA?', 118, 76, '700 {s}px Fredoka, sans-serif', '#fff8ec');
       bbText(g, 'HASSAN TARIQ · QUANTITATIVE DEVELOPER', 178, 26, '800 {s}px Nunito, sans-serif', '#7bdcb5');
+    } else if(type === 'cloud'){
+      bbText(g, 'CLOUD NATIVE QUANT', 110, 60, '700 {s}px Fredoka, sans-serif', '#a8c8f5');
+      bbText(g, 'AWS · AZURE · GCP READY', 160, 26, '800 {s}px Nunito, sans-serif', '#fff8ec');
+    } else if(type === 'ai'){
+      bbText(g, 'AI DRIVEN TRADING', 110, 60, '700 {s}px Fredoka, sans-serif', '#ffd166');
+      bbText(g, 'MACHINE LEARNING IN PRODUCTION', 160, 26, '800 {s}px Nunito, sans-serif', '#fff8ec');
     }
   }
-  ['capital','sharpe','fix','candles','greeks','news','projects','hire'].forEach(type => {
+  ['capital','sharpe','fix','candles','greeks','news','projects','hire','cloud','ai'].forEach(type => {
     const c = document.createElement('canvas'); c.width = 512; c.height = 256;
     drawBillboard(c, type);
     const tex = new THREE.CanvasTexture(c);
@@ -851,7 +857,7 @@
   }
   
   // Heavily congested traffic
-  for(let i=0;i<180;i++){
+  for(let i=0;i<400;i++){
     const isBus = i % 8 === 0;
     const g = isBus ? makeBus() : makeCar();
     const road = vRoads[(Math.random()*vRoads.length)|0];
@@ -907,7 +913,7 @@
     return g;
   }
   
-  for(let i=0;i<80;i++){
+  for(let i=0;i<150;i++){
     const g = makeCycle();
     const road = vRoads[(Math.random()*vRoads.length)|0];
     const side = Math.random() < .5 ? -7.5 : 7.5; 
@@ -930,7 +936,7 @@
     return g;
   }
   
-  for(let i=0; i<200; i++){
+  for(let i=0; i<800; i++){
     const g = makeTree();
     const road = vRoads[(Math.random()*vRoads.length)|0];
     const side = Math.random() < .5 ? -12 : 12;
@@ -993,7 +999,7 @@
   }
 
   // Spawn ambient aircraft - models are built nose-along +X, so yaw them onto the Z travel axis
-  for(let i=0; i<20; i++) {
+  for(let i=0; i<60; i++) {
     const r = Math.random();
     let mesh, speed;
     if (r < 0.4) {
