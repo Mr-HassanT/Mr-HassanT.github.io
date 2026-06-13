@@ -45,8 +45,8 @@
   #startBtn:focus-visible{outline:3px solid var(--navy);outline-offset:4px}
 
   #hud{
-    position:fixed;left:0;right:0;bottom:calc(34px + 1.6vh);z-index:6;pointer-events:none;
-    display:flex;align-items:flex-end;justify-content:center;gap:1rem;padding:0 4vw;
+    position:fixed;left:0;right:0;bottom:calc(34px + env(safe-area-inset-bottom,0px) + 1.6vh);z-index:6;pointer-events:none;
+    display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:center;gap:1rem;padding:0 4vw;
     opacity:0;transition:opacity 1s ease .5s;
   }
   #hud.on{opacity:1}
@@ -69,7 +69,8 @@
     background:linear-gradient(90deg,var(--coral),var(--sun),var(--mint))}
 
   #ticker{
-    position:fixed;left:0;right:0;bottom:0;height:34px;z-index:7;overflow:hidden;
+    position:fixed;left:0;right:0;bottom:0;height:calc(34px + env(safe-area-inset-bottom,0px));
+    padding-bottom:env(safe-area-inset-bottom,0px);z-index:7;overflow:hidden;
     background:var(--navy);border-top:3px solid var(--cream);
     display:flex;align-items:center;opacity:0;transition:opacity 1s ease .6s;
   }
@@ -83,6 +84,18 @@
   #ticker .tk.up{color:var(--mint)}
   #ticker .tk.dn{color:var(--coral)}
   @keyframes tape{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* mobile: 4 pills won't fit one row, so wrap to a 2x2 grid and shrink */
+  @media (max-width: 600px){
+    #hud{gap:.45rem .55rem;padding:0 2.5vw}
+    .pill{padding:.4rem .95rem;gap:.32rem;border-width:2px;
+      box-shadow:0 4px 0 rgba(35,49,95,.18),0 7px 14px rgba(35,49,95,.16)}
+    .pill .label{font-size:.5rem;letter-spacing:.1em}
+    .pill .value{font-size:.95rem}
+    #hint{font-size:.62rem;letter-spacing:.12em;padding:.45rem 1rem}
+    #ticker .tape{font-size:.7rem}
+    #ticker .tk{margin-right:1.8rem}
+  }
 
   #finale{
     position:fixed;inset:0;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -230,7 +243,7 @@
       lines:['C# · .NET · Blazor · ML.NET · WPF · SQL','Python · Databricks · FIX Protocol','Azure DevOps · PowerShell · MSSQL','Currently evaluating PostgreSQL & AWS','for the next generation of the stack.'] },
     { t:.90, carrier:'party', tag:'STOP 5 · AFTER HOURS', title:'LIFE OUTSIDE CODE', sub:'Sports, cars, side projects & markets', accent:'#a55f9c',
       foot:'WEEKEND VOLATILITY: HIGH · SIDE PROJECTS: ALWAYS ON',
-      lines:['Padel and cricket on weekends, a Mustang','GT that gets more tuning than my models,','personal coding projects shipping on the','side, and a watchlist of global emerging','markets that never quite closes.'] },
+      lines:['Padel and cricket on weekends, a Mustang GT that','treats fuel as a suggestion rather than a resource,','coding projects that never see the light of day, and',"a watchlist of emerging markets that's always open",'somewhere in the world.'] },
     { t:.97, carrier:'helipad', tag:'FINAL STOP', title:"LET'S TALK", sub:'Markets · code · big ideas', accent:'#e2674f',
       foot:'LIMIT ORDERS ACCEPTED · LINKEDIN.COM/IN/HASSANTQ',
       lines:['The landing pad is just ahead. If you','trade, build, or simply want to argue','about vol surfaces over coffee,','the order book is open -','bring your best question.'] },
@@ -345,15 +358,9 @@
     } else if(type === 'hire'){
       bbText(g, 'GOT ALPHA?', 118, 76, '700 {s}px Fredoka, sans-serif', '#fff8ec');
       bbText(g, 'HASSAN TARIQ · QUANTITATIVE DEVELOPER', 178, 26, '800 {s}px Nunito, sans-serif', '#7bdcb5');
-    } else if(type === 'cloud'){
-      bbText(g, 'CLOUD NATIVE QUANT', 110, 60, '700 {s}px Fredoka, sans-serif', '#a8c8f5');
-      bbText(g, 'AWS · AZURE · GCP READY', 160, 26, '800 {s}px Nunito, sans-serif', '#fff8ec');
-    } else if(type === 'ai'){
-      bbText(g, 'AI DRIVEN TRADING', 110, 60, '700 {s}px Fredoka, sans-serif', '#ffd166');
-      bbText(g, 'MACHINE LEARNING IN PRODUCTION', 160, 26, '800 {s}px Nunito, sans-serif', '#fff8ec');
     }
   }
-  ['capital','sharpe','fix','candles','greeks','news','projects','hire','cloud','ai'].forEach(type => {
+  ['capital','sharpe','fix','candles','greeks','news','projects','hire'].forEach(type => {
     const c = document.createElement('canvas'); c.width = 512; c.height = 256;
     drawBillboard(c, type);
     const tex = new THREE.CanvasTexture(c);
@@ -857,7 +864,7 @@
   }
   
   // Heavily congested traffic
-  for(let i=0;i<400;i++){
+  for(let i=0;i<180;i++){
     const isBus = i % 8 === 0;
     const g = isBus ? makeBus() : makeCar();
     const road = vRoads[(Math.random()*vRoads.length)|0];
@@ -913,7 +920,7 @@
     return g;
   }
   
-  for(let i=0;i<150;i++){
+  for(let i=0;i<80;i++){
     const g = makeCycle();
     const road = vRoads[(Math.random()*vRoads.length)|0];
     const side = Math.random() < .5 ? -7.5 : 7.5; 
@@ -936,7 +943,7 @@
     return g;
   }
   
-  for(let i=0; i<800; i++){
+  for(let i=0; i<200; i++){
     const g = makeTree();
     const road = vRoads[(Math.random()*vRoads.length)|0];
     const side = Math.random() < .5 ? -12 : 12;
@@ -999,7 +1006,7 @@
   }
 
   // Spawn ambient aircraft - models are built nose-along +X, so yaw them onto the Z travel axis
-  for(let i=0; i<60; i++) {
+  for(let i=0; i<20; i++) {
     const r = Math.random();
     let mesh, speed;
     if (r < 0.4) {
