@@ -1,0 +1,42 @@
+name: Update market mood feed
+
+# Runs around US market hours instead of 24/7:
+#  - every 30 min, 13:00-21:30 UTC, Mon-Fri (covers 9:30-16:00 ET in both
+#    DST and standard time, with a little padding either side)
+#  - one Saturday morning run so the "last session" close is captured even
+#    if Friday's final run was missed
+# The update script itself skips the write (and therefore the commit) when
+# the basket hasn't meaningfully moved.
+on:
+  schedule:
+    - cron: '0,30 13-21 * * 1-5'
+    - cron: '15 8 * * 6'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: market-weather
+  cancel-in-progress: false
+
+jobs:
+  update-feed:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node scripts/update-market-weather.mjs
+      - name: Commit updated feed
+        run: |
+          if git diff --quiet data/market-weather.json; then
+            echo "Feed unchanged"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/market-weather.json
+          git commit -m "Update market mood feed"
+          git push
