@@ -10,7 +10,7 @@ export const SITE = {
   linkedin: 'https://www.linkedin.com/in/hassantq/',
   // Replace with a different address if you prefer a dedicated contact inbox.
   email: 'htariq0601@gmail.com',
-  canonicalUrl: 'https://mr-hassant.github.io/'
+  canonicalUrl: 'https://hassantariq.com/'
 };
 
 /*

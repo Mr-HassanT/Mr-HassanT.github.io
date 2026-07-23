@@ -5,7 +5,7 @@ Developer, Abu Dhabi). Visitors take a flying tour through a procedurally
 generated city whose **weather tracks the live US market** — a SPY/QQQ
 basket turns green days into sunshine and sell-offs into storms.
 
-**Live site:** https://mr-hassant.github.io/
+**Live site:** https://hassantariq.com/
 
 ## Project structure
 

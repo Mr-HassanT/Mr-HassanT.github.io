@@ -14,6 +14,7 @@ import { loadMarketWeather, startMarketWeatherRefresh } from './market-weather.j
 import * as hud from './ui/hud.js';
 
 const THREE_CDN = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+const THREE_CDN_INTEGRITY = 'sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu';
 
 function webglSupported() {
   try {
@@ -29,6 +30,10 @@ function loadScript(src) {
   return new Promise((resolve, reject) => {
     const s = document.createElement('script');
     s.src = src;
+    if (src === THREE_CDN) {
+      s.integrity = THREE_CDN_INTEGRITY;
+      s.crossOrigin = 'anonymous';
+    }
     s.async = true;
     s.onload = resolve;
     s.onerror = () => reject(new Error(`failed to load ${src}`));
