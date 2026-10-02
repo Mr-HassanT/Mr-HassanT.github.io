@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T18:07:07.662Z",
+  "updatedAt": "2026-10-02T22:23:45.240Z",
   "source": {
     "market": "Yahoo Finance chart API"
   },
@@ -18,31 +18,31 @@
     "quotes": [
       {
         "symbol": "SPY",
-        "price": 769.12,
+        "price": 769.64,
         "previousClose": 771.35,
-        "changePct": -0.28910351980294524,
+        "changePct": -0.22168924612692506,
         "currency": "USD",
-        "marketTime": "2026-10-02T18:07:06.000Z",
+        "marketTime": "2026-10-02T20:00:00.000Z",
         "weight": 0.5625
       },
       {
         "symbol": "QQQ",
-        "price": 749.01,
+        "price": 749.58,
         "previousClose": 744.5,
-        "changePct": 0.6057756883814628,
+        "changePct": 0.6823371390194817,
         "currency": "USD",
-        "marketTime": "2026-10-02T18:07:04.000Z",
+        "marketTime": "2026-10-02T20:00:00.000Z",
         "weight": 0.4375
       }
     ],
-    "compositeChangePct": 0.10240613377773328,
+    "compositeChangePct": 0.1738222973746279,
     "mood": "balanced",
     "spark": [
       100,
       99.98,
       99.974,
       100.208,
-      100.999
+      101.071
     ],
     "source": "Yahoo Finance chart API"
   }
