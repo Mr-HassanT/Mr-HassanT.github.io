@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-16T22:38:53.854Z",
+  "updatedAt": "2026-10-17T12:10:15.085Z",
   "source": {
     "market": "Yahoo Finance chart API"
   },
@@ -44,6 +44,8 @@
       98.486,
       96.801
     ],
-    "source": "Yahoo Finance chart API"
+    "source": "Yahoo Finance chart API",
+    "stale": true,
+    "error": "429 Too Many Requests for https://query1.finance.yahoo.com/v8/finance/chart/SPY?range=5d&interval=1d"
   }
 }
