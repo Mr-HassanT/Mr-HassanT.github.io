@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-21T01:52:26.427Z",
+  "updatedAt": "2026-11-21T16:07:28.273Z",
   "source": {
     "market": "Yahoo Finance chart API"
   },
@@ -41,7 +41,8 @@
       100,
       99.112,
       99.111,
-      97.065
+      97.065,
+      92.665
     ],
     "source": "Yahoo Finance chart API"
   }
